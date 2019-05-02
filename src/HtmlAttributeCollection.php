@@ -35,7 +35,7 @@ class HtmlAttributeCollection implements \Countable, \IteratorAggregate {
 	 *
 	 * @return static
 	 */
-	public function make( $atts = array() ) {
+	public static function make( $atts = array() ) {
 		return new static( $atts );
 	}
 
