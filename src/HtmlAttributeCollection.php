@@ -273,7 +273,13 @@ class HtmlAttributeCollection implements \Countable, \IteratorAggregate {
 	public function toString() {
 		$atts = array();
 		foreach ( $this->atts as $name => $value ) {
-			$atts[] = "{$name}=\"{$value}\"";
+			if ( is_bool( $value ) ) {
+				if ( $value ) {
+					$atts[] = $name;
+				}
+			} else {
+				$atts[] = "{$name}=\"{$value}\"";
+			}
 		}
 
 		return implode( ' ', $atts );
