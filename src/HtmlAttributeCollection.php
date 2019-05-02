@@ -47,15 +47,12 @@ class HtmlAttributeCollection implements \Countable, \IteratorAggregate {
 	 * @return array
 	 */
 	protected function normalize( $atts ) {
-
 		$attributes = array();
-
-		if ( is_string( $atts ) ) {
-
+		if ( is_array( $atts ) ) {
+			$attributes = $atts;
+		} elseif ( is_string( $atts ) ) {
 			$attributes = self::parse( $atts );
-
 		} elseif ( is_object( $atts ) && is_a( $atts, get_class() ) ) {
-
 			/**
 			 * Instance of this class.
 			 *
@@ -220,7 +217,7 @@ class HtmlAttributeCollection implements \Countable, \IteratorAggregate {
 	 */
 	public function populate( $atts ) {
 		$attributes = $this->normalize( $atts );
-		$this->atts = array_map( array( $this, 'set' ), array_keys( $attributes ), array_values( $attributes ) );
+		array_map( array( $this, 'set' ), array_keys( $attributes ), array_values( $attributes ) );
 
 		return $this;
 	}
